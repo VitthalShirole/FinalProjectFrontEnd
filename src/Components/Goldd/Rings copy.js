@@ -4,6 +4,10 @@ import { useHistory } from "react-router-dom";
 import ProductServices from "../ProductServices";
 import { useEffect} from "react";
 import './Rings.css'
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 import {
     Card,
@@ -42,7 +46,35 @@ const Gold =()=>{
         })
        .catch((err)=> {console.log("error occured")})
     },[flag]);
-
+    const navigate = useNavigate();
+    let userRole = JSON.parse(sessionStorage.getItem("user"));
+    const addToCartHandler = () => {
+      // if (userRole.role === "ROLE_ADMIN") {
+      //   navigate("/Admin");
+      // } 
+      if (sessionStorage.getItem("token")) {
+        console.log("user is logged in");
+        if(userRole==='ROLE_ADMIN'){
+          navigate('/Admin')
+        }
+        let addTOCart = {
+          productId: prodarr.id,
+          customerId: sessionStorage.getItem("userID"),
+          quantity: 1,
+        };
+        console.log(addTOCart);
+        toast.success("Product added successfully");
+  
+        axios.post(USER_API_BASE_URL, addTOCart).then((res) => {
+          console.log(res.data);
+        });
+      } else {
+        console.log("user is not logged in");
+        // alert("Kindly Login First");
+        toast.warning("Kindly Login First");
+        navigate("/Login");
+      }
+    };
     const renderList=()=>{
         return prodarr.map((prod)=>{
             return <div style={{ backgroundColor: "transparent" }}>
