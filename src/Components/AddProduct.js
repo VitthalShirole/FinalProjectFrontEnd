@@ -8,7 +8,7 @@ const AddProduct =()=>{
 
     
 
-     let [prodob , setprodob]= useState({product_name:"",product_categorie:"",product_sub_categorie:"",product_weight:"",product_price:"",product_image:""});
+     let [prodob , setprodob]= useState({id:"",productname:"",category_Id:"",subCategory_Id:"",weight:"",price:"",imageurl:""});
      let history=useHistory();
      const handleChange=(event)=>{
         const {name, value}=event.target;
@@ -25,11 +25,22 @@ const AddProduct =()=>{
         
         }
 
+        const upload = (e) => {
 
+          const formData = new FormData();
+          formData.append('imgFile', e);
+  
+          // setImgPreview(JSON.stringify(e))
+          ProductServices.changeProfile(formData, prodob.id)
+              .then((response) => {
+                  console.log("Profile Picture Udated Success", "Profile Picture Udated successfully", "success");
+              })
+              .catch()
+      }
 
     return(
       
-
+<div>
  <form class="form-horizontal">
 <fieldset>
 
@@ -37,14 +48,23 @@ const AddProduct =()=>{
 
 
 
-
+<div align="left"class="form-group">
+  <label   class="col-md-4 control-label" for="id">PRODUCT ID</label>  
+  <div class="col-md-4">
+  <input id="id" name="id" placeholder="PRODUCT ID" class="form-control input-md" 
+  required="" type="text"
+  value={prodob.id}
+  onChange={handleChange}/>
+    
+  </div>
+</div>
  
  <div align="left"class="form-group">
-  <label   class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
+  <label   class="col-md-4 control-label" for="productname">PRODUCT NAME</label>  
   <div class="col-md-4">
-  <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" 
+  <input id="productname" name="productname" placeholder="PRODUCT NAME" class="form-control input-md" 
   required="" type="text"
-  value={prodob.product_name}
+  value={prodob.productname}
   onChange={handleChange}/>
     
   </div>
@@ -54,68 +74,69 @@ const AddProduct =()=>{
 
 
 <div align="left" class="form-group">
-  <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+  <label class="col-md-4 control-label" for="category_Id">PRODUCT CATEGORY</label>
   <div class="col-md-4">
-    <select onChange={handleChange} id="product_categorie" name="product_categorie" class="form-control">
+    <select onChange={handleChange} id="category_Id" name="category_Id" class="form-control">
     <option value="null">---Select Categorie--- </option>
-    <option value="Gold">Gold</option>
-  <option value="Silver">Silver</option>
-  <option value="Platinum">Platinum</option>
-  <option value="Diamond">Diamond</option>
-  <option value="Bullion">Bullion</option>
-  <option value="Antique">Antique</option>
-  <option value="1Gram">1Gram</option>
-  <option value="Other">Other</option>
+    <option value="1">Gold</option>
+  <option value="2">Silver</option>
+  <option value="3">Platinum</option>
+  <option value="4">Diamond</option>
+  <option value="5">Bullion</option>
+  <option value="6">Antique</option>
+  <option value="7">1Gram</option>
+  <option value="8">Other</option>
     </select>
   </div>
 </div>
 
 <div align="left" class="form-group">
-  <label class="col-md-4 control-label" for="product_sub_categorie">PRODUCT SUB CATEGORY</label>
+  <label class="col-md-4 control-label" for="subCategory_Id">PRODUCT SUB CATEGORY</label>
   <div class="col-md-4">
-    <select  onChange={handleChange} id="product_sub_categorie" name="product_sub_categorie" class="form-control">
+    <select  onChange={handleChange} id="subCategory_Id" name="subCategory_Id" class="form-control">
     <option value="null">---Select Sub Categorie--- </option>
-    <option value="Manalsutra">Manalsutra</option>
-  <option value="Ring">Ring</option>
-  <option value="Chain">Chain</option>
-  <option value="Pendant">Pendant</option>
-  <option value="Bangles">Bangles</option>
-  <option value="Braclet">Braclet</option>
-  <option value="Neacklace">Neacklace</option>
-  <option value="Other">Other</option>
+   
+  <option value="1">Ring</option>
+  <option value="2">Chain</option>
+  <option value="3">Manalsutra</option>
+  <option value="4">Pendant</option>
+  <option value="5">Bangles</option>
+  <option value="6">Braclet</option>
+  <option value="7">Neacklace</option>
+  <option value="8">Other</option>
     </select>
   </div>
 </div> 
 
 
  <div align="left" class="form-group">
-  <label class="col-md-4 control-label" for="product_weight">PRODUCT WEIGHT</label>  
+  <label class="col-md-4 control-label" for="weight">PRODUCT WEIGHT</label>  
   <div class="col-md-4">
-  <input type="text" id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" 
-  value={prodob.product_weight}
+  <input type="text" id="weight" name="weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" 
+  value={prodob.weight}
   onChange={handleChange}/>
     
   </div>
 </div> 
 
  <div align="left" class="form-group">
-  <label class="col-md-4 control-label" for="product_price">PRODUCT PRICE</label>  
+  <label class="col-md-4 control-label" for="price">PRODUCT PRICE</label>  
   <div class="col-md-4">
-  <input id="product_price" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text"
-   value={prodob.product_price}
+  <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text"
+   value={prodob.price}
    onChange={handleChange}/>
     
   </div>
 </div> 
 
-<div align="left" class="form-group">
-  <label class="col-md-4 control-label" for="product_image">SELECT IMAGE</label>
+{/* <div align="left" class="form-group">
+  <label class="col-md-4 control-label" for="imageurl">SELECT IMAGE</label>
   <div class="col-md-4">
-    <input id="product_image" name="product_image" class="input-file" type="file"
-    value={prodob.product_image}
+    <input id="imageurl" name="imageurl" class="input-file" type="file"
+    value={prodob.imageurl}
     onChange={handleChange}/>
   </div>
-</div> 
+</div>  */}
 
 
 
@@ -123,10 +144,42 @@ const AddProduct =()=>{
    <button type="button" class="btn btn-primary" onClick={addData}>Add Product</button>
  
   </fieldset>
-  </form> 
+  </form>
+         <form style={{ width: "40%", float: "right", marginLeft: "55%" }}>
+       <div className="form-group preview">
+       </div>
+    <div className="form-group mb-2">
+    <input type="file" className="form-control" onChange={(e) => {
+      upload(e.target.files[0])
+       }} />
+     </div>
+     {/* <button type="button" className="btn btn-success btn-block mt-2" onClick={upload} style={{ marginLeft: "25%" }}>Change Profile Picture</button> */}
 
+</form >
+  </div>
     )
 }
   
       export default AddProduct;
+      //setImgFormData(URL.createObjectURL(e.target.files[0]));
+//       <form style={{ width: "40%", float: "right", marginLeft: "55%" }}>
+//       <div className="form-group preview">
+//       </div>
+//     <div className="form-group mb-2">
+//     <input type="file" className="form-control" onChange={(e) => {
+//     setImgFormData(URL.createObjectURL(e.target.files[0])); upload(e.target.files[0])
+//       }} />
+//     </div>
+//     {/* <button type="button" className="btn btn-success btn-block mt-2" onClick={upload} style={{ marginLeft: "25%" }}>Change Profile Picture</button> */}
+
+// </form >
       // <button id="singlebutton" name="singlebutton" class="btn btn-primary">ADD</button>
+      // {
+      //   "productname": "string",
+      //   "subCategory_Id": 0,
+      //   "category_Id": 0,
+      //   "price": 0,
+      //   "weight": 0,
+      //   "imageurl": "string"
+      // }
+      

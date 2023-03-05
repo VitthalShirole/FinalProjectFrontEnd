@@ -2,9 +2,48 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* #mynav{
+  background-color: antiquewhite;
+} */
+
+.navbar-custom {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  position: fixed;
+}
+
+#ab{
+  color: black;
+}
+
+/* #navi{
+  position: fixed;
+} */
+navbar-nav{
+  display: flex;
+  justify-content:flex-end;
+  color: white;
+}
+
+.mydiv{
+  font-style: italic;
+}
+
+#top{
+  color: black;
+}
+  #ull{
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+} 
+p{
+  text-align: left;
+  color: rgba(100, 80, 80, 0.822);
+}
+
+.nav-link{
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
