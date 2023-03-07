@@ -15,6 +15,9 @@ import EmployeeDetails from './Components/Staff/EmployeeDetails'
 import EmployeeEdit from './Components/Staff/EmployeeEdit'
 import AddCartItems from './Components/AllCartItems'
 
+import SignUp from'./Components/Signup'
+import LogOut from './Components/LogOut'
+
 import logo3 from './Components/logo.jpg';
 function App() {
   return (
@@ -60,8 +63,18 @@ function App() {
   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 </svg>Login</a>
       </div>
-     
-   
+      <div class="nav-item">
+      <a class="nav-link"  href="/Signup"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg>SignUp</a>
+      </div>  
+      <div class="nav-item">
+      <a class="nav-link"  href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg>LogOut</a>
+      </div> 
   </div>
 </nav>
 <nav class="navbar navbar-expand-lg navbar-light bg-light " >
@@ -105,11 +118,16 @@ function App() {
     <Router>
         <Switch>
         <Route path="/" exact component={Home}></Route>
-        <Route path="/login" component={Login}></Route>
+       
         <Route path="/home" component={Home}></Route>
         <Route path="/addProduct" component={AddProduct}></Route>
+
         <Route path="/gold" component={Gold}></Route>
         <Route path="/1/1" component={GRing}></Route>
+
+        <Route path="/login" component={Login}></Route>
+        <Route path="/signup" component={SignUp}></Route>
+        <Route path="/logout" component={LogOut}></Route>
 
         <Route path="/manager" component={Manager}></Route>
 

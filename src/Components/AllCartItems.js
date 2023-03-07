@@ -178,13 +178,13 @@ useEffect(() => {
 }, []);
 //===========================================================================
 const getCartItems = () => {
-    // let id = sessionStorage.getItem("userID");
+     let id = sessionStorage.getItem("userId");
     // console.log(id);
     // let token = sessionStorage.getItem("token");
     // console.log(token);
    // if (sessionStorage.getItem("token")) {
       axios
-        .get(USER_API_BASE_URL + 3).then((response)=>{
+        .get(USER_API_BASE_URL + id).then((response)=>{
           console.log(response);
           JSON.stringify(response);
            setProduct(response.data);

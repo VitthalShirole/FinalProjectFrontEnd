@@ -18,6 +18,11 @@ class ProductService{
   return axios.post(this.baseUrl+`products/${userId}/image`, body,
     { headers: { 'Content-type': 'multipart/form-data;boundary=add-random-characters', Authorization: "Bearer " + localStorage.getItem("token") } });
 }
+
+loginUser(loginob){
+    return axios.post(this.baseUrl+"user/login",loginob)
+}
+
     // deleteProduct(id){
     //     return axios.delete(this.baseUrl+"product/"+id)
 

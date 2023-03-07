@@ -5,6 +5,7 @@ import ProductServices from "../ProductServices";
 import { useEffect} from "react";
 import './Rings.css'
 import axios from 'axios';
+import {toast} from 'react-toastify';
 //import { Navigate, useNavigate } from "react-router-dom";
 
 import {
@@ -37,34 +38,40 @@ const Gold =()=>{
        .catch((err)=> {console.log("error occured")})
     },[]);
    // const navigate = useNavigate();
-    let userRole = JSON.parse(sessionStorage.getItem("user"));
+    let userRole = JSON.parse(sessionStorage.getItem("Role"));
     const addToCartHandler = (prod) => {
-      // if (userRole.role === "ROLE_ADMIN") {
-      //   navigate("/Admin");
-      // } 
+      if (userRole === "Mnager") {
+        history.push("/manager");
+      } 
+      if (userRole === "Staff") {
+        history.push("/staff");
+      }
+
     //   if (sessionStorage.getItem("token")) {
     //     console.log("user is logged in");
     //     if(userRole==='ROLE_ADMIN'){
     //       navigate('/Admin')
     //     }
-        //sessionStorage.getItem("userID")
+    if(userRole === "Customer"){
+        let id=sessionStorage.getItem("userId")
         let addTOCart = {
             productId: prod,
-            customerId: 3,
+            customerId: id,
           quantity: 1,
         };
         console.log(addTOCart);
-        // toast.success("Product added successfully");
-  
+       // toast.success("Product added successfully");
+        alert("Product added successfully")
         axios.post(USER_API_BASE_URL, addTOCart).then((res) => {
           console.log(res.data);
         });
-    //   } else {
-    //     console.log("user is not logged in");
-    //     // alert("Kindly Login First");
-    //     toast.warning("Kindly Login First");
-    //     navigate("/Login");
-    //   }
+      }
+       else {
+        console.log("user is not logged in");
+        alert("Kindly Login First");
+       // toast.warning("Kindly Login First");
+        history.push("/Login");
+      }
     };
     useEffect( ()=> {
         ProductServices.getProducts().
