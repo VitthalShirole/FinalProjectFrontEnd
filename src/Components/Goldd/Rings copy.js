@@ -7,7 +7,7 @@ import './Rings.css'
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 
 import {
     Card,
@@ -20,7 +20,7 @@ import {
     CardImg,
     //Container,
   } from "reactstrap";
-
+  const USER_API_BASE_URL = "http://localhost:7070/cart/add";
 const Gold =()=>{
 
        let [prodarr, setprodarr]=useState([]);
@@ -52,28 +52,29 @@ const Gold =()=>{
       // if (userRole.role === "ROLE_ADMIN") {
       //   navigate("/Admin");
       // } 
-      if (sessionStorage.getItem("token")) {
-        console.log("user is logged in");
-        if(userRole==='ROLE_ADMIN'){
-          navigate('/Admin')
-        }
+    //   if (sessionStorage.getItem("token")) {
+    //     console.log("user is logged in");
+    //     if(userRole==='ROLE_ADMIN'){
+    //       navigate('/Admin')
+    //     }
+        //sessionStorage.getItem("userID")
         let addTOCart = {
-          productId: prodarr.id,
-          customerId: sessionStorage.getItem("userID"),
+            productId: prodarr.id,
+            customerId: 3,
           quantity: 1,
         };
         console.log(addTOCart);
-        toast.success("Product added successfully");
+        // toast.success("Product added successfully");
   
         axios.post(USER_API_BASE_URL, addTOCart).then((res) => {
           console.log(res.data);
         });
-      } else {
-        console.log("user is not logged in");
-        // alert("Kindly Login First");
-        toast.warning("Kindly Login First");
-        navigate("/Login");
-      }
+    //   } else {
+    //     console.log("user is not logged in");
+    //     // alert("Kindly Login First");
+    //     toast.warning("Kindly Login First");
+    //     navigate("/Login");
+    //   }
     };
     const renderList=()=>{
         return prodarr.map((prod)=>{
@@ -105,7 +106,7 @@ const Gold =()=>{
             :<Button
             style={{ margin: "5px" }}
             color="primary"
-            // onClick={addToCartHandler}
+            onClick={addToCartHandler}
           >
             Add to Cart
           </Button>

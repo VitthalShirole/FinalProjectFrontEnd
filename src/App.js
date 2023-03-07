@@ -13,6 +13,7 @@ import ListOfStaff from './Components/Staff/EmployeeList'
 import EmployeeAdd from './Components/Staff/EmployeeAdd'
 import EmployeeDetails from './Components/Staff/EmployeeDetails'
 import EmployeeEdit from './Components/Staff/EmployeeEdit'
+import AddCartItems from './Components/AllCartItems'
 
 import logo3 from './Components/logo.jpg';
 function App() {
@@ -116,6 +117,8 @@ function App() {
         <Route path="/addemp" component={EmployeeAdd}></Route>
         <Route path="/edit/:empid" component={EmployeeEdit}></Route>
         <Route path="/view/:empid" component={EmployeeDetails}></Route> 
+
+        <Route path="/card" component={AddCartItems}></Route>
        
 
         </Switch>

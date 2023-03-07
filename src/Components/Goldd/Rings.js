@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import ProductServices from "../ProductServices";
 import { useEffect} from "react";
 import './Rings.css'
+import axios from 'axios';
+//import { Navigate, useNavigate } from "react-router-dom";
 
 import {
     Card,
@@ -16,6 +18,8 @@ import {
     CardImg,
     //Container,
   } from "reactstrap";
+
+  const USER_API_BASE_URL = "http://localhost:7070/cart/add";
 
 const Gold =()=>{
 
@@ -32,7 +36,36 @@ const Gold =()=>{
         })
        .catch((err)=> {console.log("error occured")})
     },[]);
-
+   // const navigate = useNavigate();
+    let userRole = JSON.parse(sessionStorage.getItem("user"));
+    const addToCartHandler = (prod) => {
+      // if (userRole.role === "ROLE_ADMIN") {
+      //   navigate("/Admin");
+      // } 
+    //   if (sessionStorage.getItem("token")) {
+    //     console.log("user is logged in");
+    //     if(userRole==='ROLE_ADMIN'){
+    //       navigate('/Admin')
+    //     }
+        //sessionStorage.getItem("userID")
+        let addTOCart = {
+            productId: prod,
+            customerId: 3,
+          quantity: 1,
+        };
+        console.log(addTOCart);
+        // toast.success("Product added successfully");
+  
+        axios.post(USER_API_BASE_URL, addTOCart).then((res) => {
+          console.log(res.data);
+        });
+    //   } else {
+    //     console.log("user is not logged in");
+    //     // alert("Kindly Login First");
+    //     toast.warning("Kindly Login First");
+    //     navigate("/Login");
+    //   }
+    };
     useEffect( ()=> {
         ProductServices.getProducts().
         then((response)=>{
@@ -73,7 +106,8 @@ const Gold =()=>{
             :<Button
             style={{ margin: "5px" }}
             color="primary"
-            // onClick={addToCartHandler}
+            key={prod}
+             onClick={()=>addToCartHandler(prod.id)}
           >
             Add to Cart
           </Button>

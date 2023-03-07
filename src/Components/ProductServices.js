@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class ProductService{
     constructor(){
-        this.baseUrl="http://localhost:7071/";
+        this.baseUrl="http://localhost:7070/";
    }
     getProducts(){
         return axios.get(this.baseUrl+"products");
